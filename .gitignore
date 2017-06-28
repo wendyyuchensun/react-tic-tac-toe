@@ -1,0 +1,22 @@
+# dependencies
+/node_modules
+
+# src
+/src/*.css
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_store
+.git
+.swp
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*

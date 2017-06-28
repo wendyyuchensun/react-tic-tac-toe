@@ -1,0 +1,29 @@
+{
+  "name": "react-tic-tac-toe",
+  "version": "1.0.0",
+  "description": "A React implementation of tic tac toe game",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wendyyuchensun/react-tic-tac-toe.git"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "keywords": "React, tic tac toe",
+  "author": "Wendy Yuchen Sun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wendyyuchensun/react-tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/wendyyuchensun/react-tic-tac-toe#readme",
+  "devDependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "dependencies": {
+    "react-script": "^2.0.5"
+  }
+}

@@ -80,6 +80,13 @@ class Game extends React.Component {
     else if (history.length > 9) status = 'Tie'
     else status = `Next player: ${xIsNext? 'X':'O'}`
 
+    const moves = history.map((step, move) => {
+      const desc = move? `Move ${move}`:'Game start'
+      return (
+        <li key={move} className="move">{desc}</li>
+      )
+    })
+
     return (
       <div className="game">
         <div className="game-board">
@@ -89,8 +96,8 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
-          <ol></ol>
+          <div className="status">{status}</div>
+          <ol>{moves}</ol>
         </div>
       </div>
     )

@@ -36,6 +36,13 @@ class Board extends React.Component {
 }
 
 class Moves extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      ascending: true
+    }
+  }
+
   renderMoves() {
     const moves = this.props.history.map((step, move, history) => {
       let desc = move?
@@ -52,14 +59,25 @@ class Moves extends React.Component {
       )
     })
 
-    return moves
+    return this.state.ascending? moves:moves.reverse()
+  }
+
+  handleSort() {
+    this.setState({
+      ascending: !this.state.ascending
+    })
   }
 
   render() {
     return (
-      <ol>
-        {this.renderMoves()}
-      </ol>
+      <div>
+        <button className="sort" onClick={() => this.handleSort()}>
+          {this.state.ascending? 'Descending':'Ascending'}
+        </button>
+        <ol>
+          {this.renderMoves()}
+        </ol>
+      </div>
     )
   }
 }

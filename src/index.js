@@ -12,34 +12,25 @@ function Square(props) {
 }
 
 class Board extends React.Component {
-  renderSquare(i) {
-    return (
-      <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    )
-  }
-
   render() {
+    // loop1
+    const squares = this.props.squares.map((square, i) => {
+      return <Square key={i} value={square} onClick={() => this.props.onClick(i)} />
+    })
+
+    // loop2
+    const board = squares.reduce((board, square, i, squares) => {
+      if (!(i % 3)) {
+        const squaresInRow = squares.slice(i, i + 3)
+        board.push(
+          <div key={Math.floor(i / 3)} className="baord-row">{squaresInRow}</div>
+        )
+      }
+      return board
+    }, [])
+
     return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
+      <div>{board}</div>
     )
   }
 }
@@ -109,7 +100,7 @@ class Game extends React.Component {
     if (move === this.state.history.length - 1) return
     this.setState({
       history: this.state.history.slice(0, move + 1),
-      xIsNext: this.state.xIsNext % 2? false:true
+      xIsNext: move % 2? false:true
     })
   }
 

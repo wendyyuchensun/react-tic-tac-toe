@@ -71,7 +71,14 @@ class Game extends React.Component {
 
   render() {
     const history = this.state.history,
-          current = history[history.length - 1]
+          current = history[history.length - 1],
+          xIsNext = this.state.xIsNext,
+          winner = calcWinner(current.squares)
+
+    let status
+    if (winner) status = `Winner: ${winner}`
+    else if (history.length > 9) status = 'Tie'
+    else status = `Next player: ${xIsNext? 'X':'O'}`
 
     return (
       <div className="game">
@@ -82,7 +89,7 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div></div>
+          <div>{status}</div>
           <ol></ol>
         </div>
       </div>

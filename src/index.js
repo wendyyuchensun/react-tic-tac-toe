@@ -49,18 +49,23 @@ class Game extends React.Component {
     this.state = {
       history: [
         {squares: Array(9).fill(null)}
-      ]
+      ],
+      xIsNext: true
     }
   }
 
   onClick(i) {
     const history = this.state.history,
           current = history[history.length - 1],
-          squares = current.squares.slice()
+          squares = current.squares.slice(),
+          xIsNext = this.state.xIsNext
 
-    squares[i] = 'X'
+    if (squares[i]) return
+
+    squares[i] = xIsNext? 'X':'O'
     this.setState({
-      history: history.concat([{squares: squares}])
+      history: history.concat([{squares: squares}]),
+      xIsNext: !xIsNext
     })
   }
 

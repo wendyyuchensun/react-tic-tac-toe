@@ -44,6 +44,32 @@ class Board extends React.Component {
   }
 }
 
+class Moves extends React.Component {
+  renderMoves() {
+    const moves = this.props.history.map((step, move, history) => {
+      let desc = move? `Move ${move}`:'Game start'
+      return (
+        <li
+          key={move}
+          onClick={() => this.props.jumpTo(move)}
+          className="move">
+          {desc}
+        </li>
+      )
+    })
+
+    return moves
+  }
+
+  render() {
+    return (
+      <ol>
+        {this.renderMoves()}
+      </ol>
+    )
+  }
+}
+
 class Game extends React.Component {
   constructor() {
     super()
@@ -70,29 +96,29 @@ class Game extends React.Component {
     })
   }
 
+  jumpTo(move) {
+    if (move === this.state.history.length - 1) return
+    this.setState({
+      history: this.state.history.slice(0, move + 1),
+      xIsNext: this.state.xIsNext % 2? false:true
+    })
+  }
+
   render() {
     const history = this.state.history,
           current = history[history.length - 1],
           xIsNext = this.state.xIsNext,
           winner = calcWinner(current.squares)
 
-    let status, newGame = false
+    let status, newGame = true
     if (winner) {
       status = `Winner: ${winner}`
-      newGame = true
-    }
-    else if (history.length > 9){
+    } else if (history.length > 9) {
       status = 'Tie'
-      newGame = true
+    } else {
+      status = `Next player: ${xIsNext? 'X':'O'}`
+      newGame = false
     }
-    else status = `Next player: ${xIsNext? 'X':'O'}`
-
-    const moves = history.map((step, move) => {
-      const desc = move? `Move ${move}`:'Game start'
-      return (
-        <li key={move} className="move">{desc}</li>
-      )
-    })
 
     return (
       <div className="game">
@@ -104,7 +130,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div className="status">{status}</div>
-          <ol>{moves}</ol>
+          <Moves history={history} jumpTo={move => this.jumpTo(move)} />
           <a href="" className="newGame">{newGame? 'New Game':null}</a>
         </div>
       </div>
@@ -114,7 +140,7 @@ class Game extends React.Component {
 
 ReactDOM.render(
   <Game />,
-  document.querySelector('#root')
+  document.querySelector('main')
 )
 
 function calcWinner(squares) {

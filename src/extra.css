@@ -1,12 +1,26 @@
+footer {
+  position: absolute;
+  top: 50vh
+}
+
 .newGame {
   text-decoration: none;
 }
 
 .move, .newGame {
+  display: block;
   color: blue;
   cursor: pointer;
+  line-height: 20px;
 }
 
 .move:hover, .newGame:hover {
   color: violet;
+  font-weight: bold;
+}
+
+.move:last-of-type {
+  color: blue;
+  font-weight: bold;
+  cursor: default;
 }

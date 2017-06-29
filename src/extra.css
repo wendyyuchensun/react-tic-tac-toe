@@ -1,6 +1,6 @@
 footer {
   position: absolute;
-  top: 50vh
+  top: 55vh
 }
 
 .newGame {
@@ -19,7 +19,7 @@ footer {
   font-weight: bold;
 }
 
-.move:last-of-type {
+.lastMove {
   color: blue;
   font-weight: bold;
   cursor: default;

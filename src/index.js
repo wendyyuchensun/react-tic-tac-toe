@@ -140,7 +140,7 @@ class Game extends React.Component {
 
 ReactDOM.render(
   <Game />,
-  document.querySelector('#root')
+  document.querySelector('main')
 )
 
 function calcWinner(squares) {

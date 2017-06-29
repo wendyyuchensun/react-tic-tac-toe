@@ -1,0 +1,12 @@
+.newGame {
+  text-decoration: none;
+}
+
+.move, .newGame {
+  color: blue;
+  cursor: pointer;
+}
+
+.move:hover, .newGame:hover {
+  color: violet;
+}

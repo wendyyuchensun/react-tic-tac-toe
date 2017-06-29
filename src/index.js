@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
+import './extra.css'
 
 function Square(props) {
   return (
@@ -75,9 +76,15 @@ class Game extends React.Component {
           xIsNext = this.state.xIsNext,
           winner = calcWinner(current.squares)
 
-    let status
-    if (winner) status = `Winner: ${winner}`
-    else if (history.length > 9) status = 'Tie'
+    let status, newGame = false
+    if (winner) {
+      status = `Winner: ${winner}`
+      newGame = true
+    }
+    else if (history.length > 9){
+      status = 'Tie'
+      newGame = true
+    }
     else status = `Next player: ${xIsNext? 'X':'O'}`
 
     const moves = history.map((step, move) => {
@@ -98,6 +105,7 @@ class Game extends React.Component {
         <div className="game-info">
           <div className="status">{status}</div>
           <ol>{moves}</ol>
+          <a href="" className="newGame">{newGame? 'New Game':null}</a>
         </div>
       </div>
     )

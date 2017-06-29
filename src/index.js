@@ -47,7 +47,10 @@ class Board extends React.Component {
 class Moves extends React.Component {
   renderMoves() {
     const moves = this.props.history.map((step, move, history) => {
-      let desc = move? `Move ${move}`:'Game start'
+      let desc = move?
+          `Move ${move} (last: ${step.lastMove % 3 + 1}:${Math.floor(step.lastMove / 3) + 1})`:
+          'Game start'
+
       return (
         <li
           key={move}
@@ -75,7 +78,10 @@ class Game extends React.Component {
     super()
     this.state = {
       history: [
-        {squares: Array(9).fill(null)}
+        {
+          squares: Array(9).fill(null),
+          lastMove: null
+        }
       ],
       xIsNext: true
     }
@@ -91,7 +97,10 @@ class Game extends React.Component {
 
     squares[i] = xIsNext? 'X':'O'
     this.setState({
-      history: history.concat([{squares: squares}]),
+      history: history.concat([{
+        squares: squares,
+        lastMove: i
+      }]),
       xIsNext: !xIsNext
     })
   }
@@ -130,7 +139,9 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div className="status">{status}</div>
-          <Moves history={history} jumpTo={move => this.jumpTo(move)} />
+          <Moves
+            history={history}
+            jumpTo={move => this.jumpTo(move)} />
           <a href="" className="newGame">{newGame? 'New Game':null}</a>
         </div>
       </div>
